@@ -1,0 +1,18 @@
+<!-- ================================== TOP NAVIGATION ================================== -->
+<div class="side-menu animate-dropdown outer-bottom-xs">
+    <div class="head"><i class="icon fa fa-align-justify fa-fw"></i>دسته بندی ها</div>
+    <nav class="yamm megamenu-horizontal">
+        <ul class="nav">
+            {% for category in static_category %}
+                <li class="dropdown menu-item">
+                <a href="{% url 'products:category' category.id %}" class="dropdown-toggle"><i
+                        class="icon fa fa-shopping-bag" aria-hidden="true"></i>{{ category.title }}</a>
+            {% endfor %}
+
+        </ul>
+        <!-- /.nav -->
+    </nav>
+    <!-- /.megamenu-horizontal -->
+</div>
+<!-- /.side-menu -->
+<!-- ================================== TOP NAVIGATION : END ================================== -->

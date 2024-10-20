@@ -1,0 +1,187 @@
+{% load static %}
+
+<header class="header-style-1">
+    <div class="top-bar animate-dropdown">
+        <div class="container">
+            <div class="header-top-inner">
+                <div class="cnt-account">
+                    <ul class="list-unstyled">
+                        {% if user.is_authenticated %}
+                            <li class="myaccount"><a href="#"><span>{{ user.username }}</span></a></li>
+                            <li class="wishlist"><a href="#"><span>لیست علاقه مندیها</span></a></li>
+                            <li class="check"><a href="{% url 'accounts:logout' %}"><span>خروج</span></a></li>
+                        {% else %}
+                            <li class="check"><a href="{% url 'accounts:login' %}"><span>ورود به حساب</span></a></li>
+                            <li class="check"><a href="{% url 'accounts:register' %}"><span>ثبت نام</span></a></li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+                <!-- /.cnt-account -->
+            </div>
+            <!-- /.header-top-inner -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.header-top -->
+    <!-- ============================================== TOP MENU : END ============================================== -->
+    <div class="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
+                    <!-- ============================================================= LOGO ============================================================= -->
+                    <div class="logo"><a href="home.html"> <img src="{% static 'images/logo.png' %}" alt="لوگو"> </a>
+                    </div>
+                    <!-- /.logo -->
+                    <!-- ============================================================= LOGO : END ============================================================= -->
+                </div>
+                <!-- /.logo-holder -->
+
+                <div class="col-lg-7 col-md-6 col-sm-8 col-xs-12 top-search-holder">
+                    <!-- /.contact-row -->
+                    <!-- ============================================================= SEARCH AREA ============================================================= -->
+                    <div class="search-area">
+                        <form>
+                            <div class="control-group">
+                                <input class="search-field" placeholder="اینجا جستجو کنید...">
+                                <a class="search-button" href="#"></a></div>
+                        </form>
+                    </div>
+                    <!-- /.search-area -->
+                    <!-- ============================================================= SEARCH AREA : END ============================================================= -->
+                </div>
+                <!-- /.top-search-holder -->
+
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 animate-dropdown top-cart-row">
+                    <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
+
+                    <div class="dropdown dropdown-cart"><a href="#" class="dropdown-toggle lnk-cart"
+                                                           data-toggle="dropdown">
+                        <div class="items-cart-inner">
+                            {% if user.is_authenticated %}
+                                <div class="basket">
+                                    <div class="total-price-basket"><span class="lbl">سبد خرید</span> <span
+                                            class="value">{{ wallet.money }} تومان</span>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="cart-item product-summary">
+                                    {% for product in static_product %}
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <div class="image"><a
+                                                        href="{% url 'products:product_detail' product.slug %}"><img
+                                                        src="{{ product.image.url }}" alt=""></a></div>
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <h3 class="name"><a href="index8a95.html?page-detail">محصول ساده</a>
+                                                </h3>
+                                                <div class="price">{{ product.price }} تومان</div>
+                                            </div>
+                                            <div class="col-xs-1 action"><a href="{% url 'carts:del_cart' product.id %}"><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                                <!-- /.cart-item -->
+                                <div class="clearfix"></div>
+                                <hr>
+                                <div class="clearfix cart-total">
+                                    <div class="pull-right"><span class="text">مجموع کل: </span><span class="price">{{ total }}                                     تومان</span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <a href="{% url 'carts:cart' %}" class="btn btn-upper btn-primary btn-block m-t-20">خرید</a>
+                                </div>
+                                <!-- /.cart-total-->
+
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-menu-->
+                    </div>
+                    <!-- /.dropdown-cart -->
+
+                    <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->
+                </div>
+                <!-- /.top-cart-row -->
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.main-header -->
+
+    <!-- ============================================== NAVBAR ============================================== -->
+    <div class="header-nav animate-dropdown">
+        <div class="container">
+            <div class="yamm navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button data-target="#mc-horizontal-menu-collapse" data-toggle="collapse"
+                            class="navbar-toggle collapsed" type="button">
+                        <span class="sr-only">ناوبری را تغییر دهید</span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span></button>
+                </div>
+                <div class="nav-bg-class">
+                    <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
+                        <div class="nav-outer">
+                            <ul class="nav navbar-nav">
+                                <li class="{% if request.resolver_match.url_name == 'home' %}
+                                	active
+                                {% endif %}  dropdown"><a href="{% url 'home:home' %}">صفحه اصلی</a></li>
+                                <li class="{% if request.resolver_match.url_name == 'product_list' %}
+                                	active
+                                {% endif %}  dropdown"><a href="{% url 'products:product_list' %}">محصولات</a></li>
+                                <li class="{% if request.resolver_match.url_name == 'blog_list' %}
+                                	active
+                                {% endif %}  dropdown"><a href="{% url 'blog:blog_list' %}">وبلاگ</a></li>
+                                <li class="dropdown mega-menu">
+                                    <a href="{% url 'products:category' 2 %}" data-hover="dropdown" class="dropdown-toggle"
+                                       data-toggle="{% if request.resolver_match.url_name == 'product_list' %}
+                                	active
+                                {% endif %} dropdown">دسته بندی ها</a>
+                                    <ul class="dropdown-menu container">
+                                        <li>
+                                            <div class="yamm-content">
+                                                <div class="row">
+                                                    {% for category in static_category %}
+                                                    	<div class="col-xs-12 col-sm-12 col-md-2 col-menu">
+                                                        <h2 class="title">{{ category.title }}</h2>
+                                                    </div>
+                                                    {% endfor %}
+                                                    
+                                                    <!-- /.col -->
+                                                </div>
+                                                <!-- /.row -->
+                                            </div>
+                                    </ul>
+                                </li>
+                                <li class="dropdown hidden-sm"><a href="category.html"><span
+                                        class="menu-label new-menu hidden-xs">جدید</span> </a></li>
+                                <li class="dropdown  navbar-right special-menu"><a href="#">30% تخفیف روی اجناس انتخابی
+                                    دریافت کنید</a></li>
+                            </ul>
+                            <!-- /.navbar-nav -->
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- /.nav-outer -->
+                    </div>
+                    <!-- /.navbar-collapse -->
+
+                </div>
+                <!-- /.nav-bg-class -->
+            </div>
+            <!-- /.navbar-default -->
+        </div>
+        <!-- /.container-class -->
+
+    </div>
+    <!-- /.header-nav -->
+    <!-- ============================================== NAVBAR : END ============================================== -->
+
+</header>

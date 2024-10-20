@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+    <!-- ============================================== HEADER : END ============================================== -->
+    <div class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-inner">
+                <ul class="list-inline list-unstyled">
+                    <li><a href="{% url 'home:home' %}">صفحه اصلی</a></li>
+                    <li class="active">وارد شدن</li>
+                </ul>
+            </div><!-- /.breadcrumb-inner -->
+        </div><!-- /.container -->
+    </div><!-- /.breadcrumb -->
+
+    <div class="body-content">
+        <div class="container">
+            <div class="sign-in-page">
+                <div class="row">
+                    <!-- Sign-in -->
+                    <div class="col-md-6 col-sm-6 sign-in" style="margin-right: 350px">
+                        <h4 class="">ورود</h4>
+                        <p class="">سلام، به صفحه ورود خوش آمدید.</p>
+                        <div class="social-sign-in outer-top-xs">
+                            <a href="#" class="facebook-sign-in"><i class="fa fa-facebook"></i>با فیس بوک وارد شوید</a>
+                            <a href="#" class="twitter-sign-in"><i class="fa fa-twitter"></i>با توییتر وارد شوید</a>
+                        </div>
+                        <form class="register-form outer-top-xs" role="form" method="post">
+                        {% csrf_token %}
+                            {% if error %}
+                            	<p class="alert-danger" style="color: black">
+                                {{ error }}
+                                </p>
+                            {% endif %}
+                            <div class="form-group">
+                                <label class="info-title" for="exampleInputEmail1">نام کاربری<span>*</span></label>
+                                <input type="text" class="form-control unicase-form-control text-input"
+                                       id="username" name="username">
+                            </div>
+                            <div class="form-group">
+                                <label class="info-title" for="exampleInputPassword1">رمز عبور<span>*</span></label>
+                                <input type="password" class="form-control unicase-form-control text-input"
+                                       id="password" name="password">
+                            </div>
+                            <div class="radio outer-xs">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">مرا به
+                                    خاطر بسپار!
+                                </label>
+                                <a href="#" class="forgot-password pull-right">رمز عبور خود را فراموش کرده اید؟</a>
+                            </div>
+                            <button type="submit" class="btn-upper btn btn-primary checkout-page-button">وارد شدن
+                            </button>
+                        </form>
+                    </div>
+                    <!-- Sign-in -->
+                    <!-- create a new account -->            </div><!-- /.row -->
+            </div><!-- /.sigin-in-->
+            <!-- ============================================== BRANDS CAROUSEL ============================================== -->
+            <div id="brands-carousel" class="logo-slider wow fadeInUp">
+
+                <div class="logo-slider-inner">
+                    <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
+                        <div class="item m-t-15">
+                            <a href="#" class="image">
+                                <img data-echo="https://www.mellatweb.com/templates/main/img/svg/logo.svg"
+                                     src="{% static 'images/blank.gif' %}" alt="">
+                            </a>
+                        </div><!--/.item-->
+
+                        <div class="item m-t-10">
+                            <a href="#" class="image">
+                                <img data-echo="https://www.mellatweb.com/templates/main/img/svg/logo.svg"
+                                     src="{% static 'images/blank.gif' %}" alt="">
+                            </a>
+                        </div><!--/.item-->
+
+                        <div class="item">
+                            <a href="#" class="image">
+                                <img data-echo="https://www.mellatweb.com/templates/main/img/svg/logo.svg"
+                                     src="{% static 'images/blank.gif' %}" alt="">
+                            </a>
+                        </div><!--/.item-->
+
+                        <div class="item">
+                            <a href="#" class="image">
+                                <img data-echo="https://www.mellatweb.com/templates/main/img/svg/logo.svg"
+                                     src="{% static 'images/blank.gif' %}" alt="">
+                            </a>
+                        </div><!--/.item-->
+
+                        <div class="item">
+                            <a href="#" class="image">
+                                <img data-echo="https://www.mellatweb.com/templates/main/img/svg/logo.svg"
+                                     src="{% static 'images/blank.gif' %}" alt="">
+                            </a>
+                        </div><!--/.item-->
+
+                        <div class="item">
+                            <a href="#" class="image">
+                                <img data-echo="https://www.mellatweb.com/templates/main/img/svg/logo.svg"
+                                     src="{% static 'images/blank.gif' %}" alt="">
+                            </a>
+                        </div><!--/.item-->
+
+                        <div class="item">
+                            <a href="#" class="image">
+                                <img data-echo="https://www.mellatweb.com/templates/main/img/svg/logo.svg"
+                                     src="{% static 'images/blank.gif' %}" alt="">
+                            </a>
+                        </div><!--/.item-->
+
+                        <div class="item">
+                            <a href="#" class="image">
+                                <img data-echo="https://www.mellatweb.com/templates/main/img/svg/logo.svg"
+                                     src="{% static 'images/blank.gif' %}" alt="">
+                            </a>
+                        </div><!--/.item-->
+
+                        <div class="item">
+                            <a href="#" class="image">
+                                <img data-echo="https://www.mellatweb.com/templates/main/img/svg/logo.svg"
+                                     src="{% static 'images/blank.gif' %}" alt="">
+                            </a>
+                        </div><!--/.item-->
+
+                        <div class="item">
+                            <a href="#" class="image">
+                                <img data-echo="https://www.mellatweb.com/templates/main/img/svg/logo.svg"
+                                     src="{% static 'images/blank.gif' %}" alt="">
+                            </a>
+                        </div><!--/.item-->
+                    </div><!-- /.owl-carousel #logo-slider -->
+                </div><!-- /.logo-slider-inner -->
+
+            </div><!-- /.logo-slider -->
+            <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
+        </div><!-- /.container -->
+    </div><!-- /.body-content -->
+    <!-- ============================================================= FOOTER ============================================================= -->
+
+    <!-- ============================================== INFO BOXES ============================================== -->
+    <div class="row our-features-box">
+        <div class="container">
+            <ul>
+                <li>
+                    <div class="feature-box">
+                        <div class="icon-truck"></div>
+                        <div class="content-blocks">ما به تمام دنیا ارسال میکنیم</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="feature-box">
+                        <div class="icon-support"></div>
+                        <div class="content-blocks">با +1 800 789 0000 تماس بگیرید</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="feature-box">
+                        <div class="icon-money"></div>
+                        <div class="content-blocks">تضمین بازگشت پول</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="feature-box">
+                        <div class="icon-return"></div>
+                        <div class="content">بازگشت 30 روزه</div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <!-- /.info-boxes -->
+    <!-- ============================================== INFO BOXES : END ============================================== -->
+
+{% endblock %}

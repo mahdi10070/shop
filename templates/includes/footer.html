@@ -1,0 +1,126 @@
+{% load static %}
+<footer id="footer" class="footer color-bg">
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="address-block">
+
+                        <!-- /.module-heading -->
+
+                        <div class="module-body">
+                            <ul class="toggle-footer" style="">
+                                <li class="media">
+                                    <div class="pull-left"><span class="icon fa-stack fa-lg"> <i
+                                            class="fa fa-map-marker fa-stack-1x fa-inverse"></i> </span></div>
+                                    <div class="media-body">
+                                        <p>آدرس کارگر شمالی امیر آباد کوچه دوم پلاگ 40</p>
+                                    </div>
+                                </li>
+                                <li class="media">
+                                    <div class="pull-left"><span class="icon fa-stack fa-lg"> <i
+                                            class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span></div>
+                                    <div class="media-body">
+                                        <p>09210150068</p>
+                                    </div>
+                                </li>
+                                <li class="media">
+                                    <div class="pull-left"><span class="icon fa-stack fa-lg"><i
+                                            class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></div>
+                                    <div class="media-body"><span><a href="#">mahdi@gmail.com</a></span></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.module-body -->
+                </div>
+                <!-- /.col -->
+
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="module-heading">
+                        <h4 class="module-title">خدمات مشتری</h4>
+                    </div>
+                    <!-- /.module-heading -->
+
+                    <div class="module-body">
+                        <ul class="list-unstyled">
+                            <li class="first"><a href="#" title="با ما تماس بگیرید">حساب من</a></li>
+                            <li><a href="{% url 'carts:cart' %}" title="درباره ما">تاریخچه سفارش ها</a></li>
+                            <li><a href="#" title="faq">سوالات متداول</a></li>
+                            <li class="last"><a href="#" title="سفارش من کجاست؟">مرکز کمک</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.module-body -->
+                </div>
+                <!-- /.col -->
+
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="module-heading">
+                        <h4 class="module-title">لیدی تارگت</h4>
+                    </div>
+                    <!-- /.module-heading -->
+
+                    <div class="module-body">
+                        <ul class="list-unstyled">
+                            <li class="first"><a title="حساب شما" href="#">درباره ما</a></li>
+                            <li><a title="اطلاعات" href="#">خدمات مشتری</a></li>
+                            <li><a title="آدرس ها" href="#">شرکت</a></li>
+                            <li><a title="آدرس ها" href="#">روابط سرمایه گذار</a></li>
+                            <li class="last"><a title="تاریخچه سفارشات" href="#">جستجوی پیشرفته</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.module-body -->
+                </div>
+                <!-- /.col -->
+
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="module-heading">
+                        <h4 class="module-title">چرا ما را انتخاب کنید</h4>
+                    </div>
+                    <!-- /.module-heading -->
+
+                    <div class="module-body">
+                        <ul class="list-unstyled">
+                            <li class="first"><a href="#" title="درباره ما">راهنمای خرید</a></li>
+                            <li><a href="#" title="وبلاگ">وبلاگ</a></li>
+                            <li><a href="#" title="شرکت">شرکت</a></li>
+                            <li><a href="#" title="روابط سرمایه گذار">روابط سرمایه گذار</a></li>
+                            <li class=" last"><a href="contact-us.html" title="تامین کنندگان">با ما تماس بگیرید</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.module-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-bar">
+        <div class="container">
+            <div class="col-xs-12 col-sm-4 no-padding social">
+                <ul class="link">
+                    <li class="fb pull-left"><a target="_blank" rel="nofollow" href="#" title="فیس بوک"></a></li>
+                    <li class="tw pull-left"><a target="_blank" rel="nofollow" href="#" title="توییتر"></a></li>
+                    <li class="googleplus pull-left"><a target="_blank" rel="nofollow" href="#" title="گوگل پلاس"></a>
+                    </li>
+                    <li class="rss pull-left"><a target="_blank" rel="nofollow" href="#" title="RSS"></a></li>
+                    <li class="pintrest pull-left"><a target="_blank" rel="nofollow" href="#" title="پینترست"></a></li>
+                    <li class="linkedin pull-left"><a target="_blank" rel="nofollow" href="#" title="لینکدین"></a></li>
+                    <li class="youtube pull-left"><a target="_blank" rel="nofollow" href="#" title="یوتیوب"></a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-4 no-padding copyright"><a target="_blank" href="https://www.mellatweb.com">ترجمه
+                و راستچینی در ملت وب</a></div>
+            <div class="col-xs-12 col-sm-4 no-padding">
+                <div class="clearfix payment-methods">
+                    <ul>
+                        <li><img src="{% static 'images/payments/1.png' %}" alt=""></li>
+                        <li><img src="{% static 'images/payments/2.png' %}" alt=""></li>
+                        <li><img src="{% static 'images/payments/3.png' %}" alt=""></li>
+                        <li><img src="{% static 'images/payments/4.png' %}" alt=""></li>
+                        <li><img src="{% static 'images/payments/5.png' %}" alt=""></li>
+                    </ul>
+                </div>
+                <!-- /.payment-methods -->
+            </div>
+        </div>
+    </div>
+</footer>

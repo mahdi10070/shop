@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block main %}
+
+
+    <div class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-inner">
+                <ul class="list-inline list-unstyled">
+                    <li><a href="#">صفحه اصلی</a></li>
+                    <li class="active">سبد خرید</li>
+                </ul>
+            </div><!-- /.breadcrumb-inner -->
+        </div><!-- /.container -->
+    </div><!-- /.breadcrumb -->
+
+    <div class="body-content outer-top-xs">
+        <div class="container">
+            <div class="row ">
+                <div class="shopping-cart">
+                    <div class="shopping-cart-table ">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="cart-romove item">برداشتن</th>
+                                    <th class="cart-description item">تصویر</th>
+                                    <th class="cart-product-name item">نام محصول</th>
+                                    <th class="cart-qty item">تعداد</th>
+                                    <th class="cart-sub-total item">جمع کل</th>
+                                </tr>
+                                </thead><!-- /thead -->
+
+                                <tbody>
+                                {% for product in static_product %}
+                                    <tr>
+                                        <td class="romove-item"><a href="{% url 'carts:del_cart' product.id %}"
+                                                                   title="لغو" class="icon"><i
+                                                class="fa fa-trash-o"></i></a></td>
+                                        <td class="cart-image">
+                                            <a class="entry-thumbnail"
+                                               href="{% url 'products:product_detail' product.slug %}">
+                                                <img src="{{ product.image.url }}" alt="">
+                                            </a>
+                                        </td>
+                                        <td class="cart-product-name-info">
+                                            <h4 class="cart-product-description"><a
+                                                    href="{% url 'products:product_detail' product.slug %}">{{ product.title }}</a>
+                                            </h4>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="rating rateit-small"></div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="reviews">
+                                                        (06 نظر)
+                                                    </div>
+                                                </div>
+                                            </div><!-- /.row -->
+                                            <div class="cart-product-info">
+                                                <span class="product-color">رنگ: <span>آبی</span></span>
+                                            </div>
+                                        </td>
+                                        <td class="cart-product-sub-total"><span
+                                                class="cart-sub-total-price">{{ product.count }}</span></td>
+                                        <td class="cart-product-sub-total"><span
+                                                class="cart-sub-total-price">{{ product.price }} تومان</span></td>
+
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody><!-- /tbody -->
+
+                                <tfoot>
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="shopping-cart-btn">
+							<span class="">
+								<a href="{% url 'products:product_list' %}"
+                                   class="btn btn-upper btn-primary outer-left-xs"
+                                   style="margin-right: 550px; padding-right: 100px; padding-left: 100px">ادامه خرید </a>
+								</span>
+                                        </div><!-- /.shopping-cart-btn -->
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table><!-- /table -->
+                        </div>
+                    </div><!-- /.shopping-cart-table -->
+
+                    <div class="col-md-4 col-sm-12 estimate-ship-tax">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <span class="estimate-title">کد تخفیف</span>
+                                    <p>اگر کد کوپن خود را دارید وارد کنید..</p>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control unicase-form-control text-input"
+                                               placeholder="شما کوپن..">
+                                    </div>
+                                    <div class="clearfix pull-right">
+                                        <button type="submit" class="btn-upper btn btn-primary"
+                                                style="margin-right: 120px">درخواست کوپن
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody><!-- /tbody -->
+                        </table><!-- /table -->
+                    </div><!-- /.estimate-ship-tax -->
+
+                    <div class="col-md-4 col-sm-12 cart-shopping-total">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <div class="cart-sub-total">
+                                        جمع کل <span class="inner-left-md">{{ total }} تومان</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            </thead><!-- /thead -->
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="cart-checkout-btn pull-right">
+                                        {% if request.user.address %}
+                                            <a href="{% url 'accounts:address' %}">
+                                                <button type="submit" class="btn btn-primary checkout-btn"
+                                                        style="margin-right: 75px">اقدام به پرداخت
+                                                </button>
+                                            </a>
+                                        {% else %}
+                                            <a href="{% url 'home:home' %}">
+                                                <button type="submit" class="btn btn-primary checkout-btn"
+                                                        style="margin-right: 75px">اقدام به پرداخت
+                                                </button>
+                                            </a>
+                                        {% endif %}
+
+
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody><!-- /tbody -->
+                        </table><!-- /table -->
+                    </div><!-- /.cart-shopping-total -->            </div><!-- /.shopping-cart -->
+            </div>
+        </div><!-- /.container -->
+    </div><!-- /.body-content -->
+
+{% endblock %}

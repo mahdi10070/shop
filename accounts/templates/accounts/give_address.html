@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+    <div class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-inner">
+                <ul class="list-inline list-unstyled">
+                    <li><a href="{% url 'home:home' %}">صفحه اصلی</a></li>
+                    <li class="active">آدرس</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="body-content">
+        <div class="container">
+            <div class="sign-in-page">
+                <div class="row">
+                    <!-- Sign-in -->
+                    <div class="col-md-6 col-sm-6 sign-in" style="margin-right: 350px">
+                        <h4 class="">آدرس</h4>
+                        <p class="">سلام، لطفا آدرس مد نظر خود را وارد کنید.</p>
+                        <form class="register-form outer-top-xs" role="form" method="post">
+                            {% csrf_token %}
+                            {% if error_user %}
+                                <p class="alert-danger" style="color: #000000">
+                                    {{ error_user }}
+                                </p>
+                            {% endif %}
+                            <div class="form-group">
+                                <label class="info-title" for="exampleInputEmail1">آدرس</label>
+                                <textarea type="textaira" style="resize: none" class="form-control unicase-form-control text-input"
+                                       id="address" name="address"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="info-title" for="exampleInputEmail1">شماره تماس</label>
+                                <input type="text" class="form-control unicase-form-control text-input"
+                                       id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label class="info-title" for="exampleInputPassword1">کد پستی<span></span></label>
+                                <input type="text" class="form-control unicase-form-control text-input"
+                                       id="postal_code" name="postal_code">
+                            </div>
+                            <button type="submit" class="btn-upper btn btn-primary checkout-page-button">ثبت آدرس
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
