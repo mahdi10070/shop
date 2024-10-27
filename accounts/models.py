@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from products.models import Product
+from products.models import Product, Category
 
 
 
@@ -32,3 +32,15 @@ class Address(models.Model):
 
     class Meta:
         verbose_name_plural = 'آدرس'
+
+class Information(models.Model):
+    user = models.ForeignKey(User, related_name='information', on_delete=models.CASCADE, verbose_name='کاربر')
+    like_product = models.ManyToManyField(Product, related_name='information', null = True, blank = True, verbose_name='علاقمند')
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='information', blank=True, null=True, verbose_name='آدرس')
+
+
+    def __str__(self):
+        return self.user.username
+
+    class Meta:
+        verbose_name_plural = 'مشخصات کاربران'

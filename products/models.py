@@ -22,6 +22,7 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='قیمت')
     count = models.IntegerField(verbose_name='تعداد')
     status = models.BooleanField(default=True, verbose_name='موجددی در انبار')
+    star = models.IntegerField(null = True, blank = True, default=0)
     image = models.ImageField(upload_to='products/', verbose_name='عکس')
     discount = models.IntegerField(blank = True, null = True)
     slug = models.SlugField(max_length=100, unique=True, blank=True, null=True, verbose_name='آدرس دهی')

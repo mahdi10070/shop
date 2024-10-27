@@ -1,6 +1,7 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import DetailView, ListView, View
 from .models import Product, Category
+from accounts.models import Information
 from custom_mixing.customize_mixing import UserLoginMixin
 
 
@@ -25,4 +26,37 @@ class CategoryListView(View):
     def get(self, request, pk):
         category = get_object_or_404(Category, id=pk)
         products = category.product.all()
+        return render(request, 'products/product_list.html', {'products': products})
+
+
+class ProductLikeListView(UserLoginMixin, View):
+    def get(self, request):
+        product_like = Information.objects.get(user = request.user)
+        products = Product.objects.filter(information = product_like)
+        if products:
+            return render(request, 'products/List_of_interests.html', context = {'products': products})
+        return render(request, 'products/List_of_interests.html', context = {})
+
+class RemoveProductLikeView(UserLoginMixin, View):
+    def get(self, request, id):
+        product = Product.objects.get(id = id)
+        product_like = Information.objects.get(user = request.user)
+        product_like.like_product.remove(product)
+        return redirect('products:product_like')
+
+
+class AddProductLikeView(UserLoginMixin, View):
+    def get(self, request, id):
+        product = Product.objects.get(id = id)
+        like = Information.objects.get(user = request.user)
+        like.like_product.add(product)
+        like.save()
+        url = request.GET.get('next')
+        print(f"in hamon url mane =============================> {url}")
+        return redirect('products:product_list')
+
+class SearchProductView(UserLoginMixin, View):
+    def get(self, request):
+        search = request.GET.get('q')
+        products = Product.objects.filter(title__icontains=search)
         return render(request, 'products/product_list.html', {'products': products})

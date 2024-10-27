@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block main %}
+	<div class="body-content outer-top-bd">
+	<div class="container">
+		<div class="x-page inner-bottom-sm">
+			<div class="row">
+				<div class="col-md-12 x-text text-center">
+					<h1>404</h1>
+					<p>متأسفیم، صفحه درخواستی شما در دسترس نیست.</p>
+					<form role="form" class="outer-top-vs outer-bottom-xs">
+                        <input placeholder="جستجو کردن" autocomplete="off">
+                        <button class="  btn-default le-button">برو</button>
+                    </form>
+					<a href="{% url 'home:home' %}"><i class="fa fa-home"></i>به صفحه اصلی بروید</a>
+				</div>
+			</div><!-- /.row -->
+		</div><!-- /.sigin-in-->
+	</div><!-- /.container -->
+</div><!-- /.body-content -->
+
+{% endblock %}

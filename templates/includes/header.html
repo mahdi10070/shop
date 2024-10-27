@@ -8,11 +8,15 @@
                     <ul class="list-unstyled">
                         {% if user.is_authenticated %}
                             <li class="myaccount"><a href="#"><span>{{ user.username }}</span></a></li>
-                            <li class="wishlist"><a href="#"><span>لیست علاقه مندیها</span></a></li>
+                            <li class="wishlist"><a
+                                    href="{% url 'products:product_like' %}"><span>لیست علاقه مندیها</span></a></li>
                             <li class="check"><a href="{% url 'accounts:logout' %}"><span>خروج</span></a></li>
                         {% else %}
-                            <li class="check"><a href="{% url 'accounts:login' %}"><span>ورود به حساب</span></a></li>
-                            <li class="check"><a href="{% url 'accounts:register' %}"><span>ثبت نام</span></a></li>
+                            <li class="check"><a
+                                    href="{% url 'accounts:login' %}?next={{ request.path|urlencode }}"><span>ورود به حساب</span></a>
+                            </li>
+                            <li class="check"><a href="{% url 'accounts:register' %}?next={{ request.path|urlencode }}"><span>ثبت نام</span></a>
+                            </li>
                         {% endif %}
 
                     </ul>
@@ -41,10 +45,13 @@
                     <!-- /.contact-row -->
                     <!-- ============================================================= SEARCH AREA ============================================================= -->
                     <div class="search-area">
-                        <form>
+                        <form action="{% url 'products:search' %}">
                             <div class="control-group">
-                                <input class="search-field" placeholder="اینجا جستجو کنید...">
-                                <a class="search-button" href="#"></a></div>
+                                <input class="search-field" name="q" type="text" placeholder="اینجا جستجو کنید...">
+                                {#                                <input type="text" name="q" class="searchText" {% if request.GET.q %}placeholder="{{ request.GET.q }}"{% else %}placeholder="type to search..."{% endif %}#}
+                                {#                               autocomplete="on">#}
+
+                            </div>
                         </form>
                     </div>
                     <!-- /.search-area -->
@@ -82,7 +89,9 @@
                                                 </h3>
                                                 <div class="price">{{ product.price }} تومان</div>
                                             </div>
-                                            <div class="col-xs-1 action"><a href="{% url 'carts:del_cart' product.id %}"><i class="fa fa-trash"></i></a>
+                                            <div class="col-xs-1 action"><a
+                                                    href="{% url 'carts:del_cart' product.id %}"><i
+                                                    class="fa fa-trash"></i></a>
                                             </div>
                                         </div>
                                     {% endfor %}
@@ -92,7 +101,8 @@
                                 <div class="clearfix"></div>
                                 <hr>
                                 <div class="clearfix cart-total">
-                                    <div class="pull-right"><span class="text">مجموع کل: </span><span class="price">{{ total }}                                     تومان</span>
+                                    <div class="pull-right"><span class="text">مجموع کل: </span><span
+                                            class="price">{{ total }}                                     تومان</span>
                                     </div>
                                     <div class="clearfix"></div>
                                     <a href="{% url 'carts:cart' %}" class="btn btn-upper btn-primary btn-block m-t-20">خرید</a>
@@ -141,7 +151,8 @@
                                 	active
                                 {% endif %}  dropdown"><a href="{% url 'blog:blog_list' %}">وبلاگ</a></li>
                                 <li class="dropdown mega-menu">
-                                    <a href="{% url 'products:category' 2 %}" data-hover="dropdown" class="dropdown-toggle"
+                                    <a href="{% url 'products:category' 2 %}" data-hover="dropdown"
+                                       class="dropdown-toggle"
                                        data-toggle="{% if request.resolver_match.url_name == 'product_list' %}
                                 	active
                                 {% endif %} dropdown">دسته بندی ها</a>
@@ -150,11 +161,11 @@
                                             <div class="yamm-content">
                                                 <div class="row">
                                                     {% for category in static_category %}
-                                                    	<div class="col-xs-12 col-sm-12 col-md-2 col-menu">
-                                                        <h2 class="title">{{ category.title }}</h2>
-                                                    </div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-2 col-menu">
+                                                            <a href="{% url 'products:category' category.id %}"><h2 class="title">{{ category.title }}</h2></a>
+                                                        </div>
                                                     {% endfor %}
-                                                    
+
                                                     <!-- /.col -->
                                                 </div>
                                                 <!-- /.row -->

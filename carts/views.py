@@ -32,6 +32,8 @@ class AddToCartView(View):
 
 class DeleteItemCartView(UserLoginMixin, View):
     def get(self, request, id):
-        Product.objects.filter(id=id).delete()
+        product = Product.objects.get(id=id)
+        wallet = Wallet.objects.get(user = request.user)
+        wallet.product.remove(product)
         return redirect('carts:cart')
 
