@@ -21,4 +21,4 @@ def get_wallet(request):
 
 def get_category(request):
     category = Category.objects.all()
-    return {'static_category': category, }
+    return {'static_category': category}

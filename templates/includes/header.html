@@ -85,12 +85,12 @@
                                                         src="{{ product.image.url }}" alt=""></a></div>
                                             </div>
                                             <div class="col-xs-7">
-                                                <h3 class="name"><a href="index8a95.html?page-detail">محصول ساده</a>
+                                                <h3 class="name"><a href="{% url 'products:product_detail' product.slug %}">محصول ساده</a>
                                                 </h3>
                                                 <div class="price">{{ product.price }} تومان</div>
                                             </div>
                                             <div class="col-xs-1 action"><a
-                                                    href="{% url 'carts:del_cart' product.id %}"><i
+                                                    href="{% url 'carts:del_cart' product.id %}?next={{ request.path|urlencode }}"><i
                                                     class="fa fa-trash"></i></a>
                                             </div>
                                         </div>

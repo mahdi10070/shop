@@ -31,11 +31,13 @@ class CategoryListView(View):
 
 class ProductLikeListView(UserLoginMixin, View):
     def get(self, request):
-        product_like = Information.objects.get(user = request.user)
-        products = Product.objects.filter(information = product_like)
-        if products:
-            return render(request, 'products/List_of_interests.html', context = {'products': products})
-        return render(request, 'products/List_of_interests.html', context = {})
+        if Information.objects.filter(user = request.user).exists():
+            product_like = Information.objects.get(user = request.user)
+            products = Product.objects.filter(information = product_like)
+            if products:
+                return render(request, 'products/List_of_interests.html', context = {'products': products})
+            return render(request, 'products/List_of_interests.html', context = {})
+        return render(request, 'products/List_of_interests.html', context={})
 
 class RemoveProductLikeView(UserLoginMixin, View):
     def get(self, request, id):
@@ -48,11 +50,12 @@ class RemoveProductLikeView(UserLoginMixin, View):
 class AddProductLikeView(UserLoginMixin, View):
     def get(self, request, id):
         product = Product.objects.get(id = id)
-        like = Information.objects.get(user = request.user)
+        like = Information.objects.get(user=request.user)
         like.like_product.add(product)
         like.save()
         url = request.GET.get('next')
-        print(f"in hamon url mane =============================> {url}")
+        if url:
+            return redirect(url)
         return redirect('products:product_list')
 
 class SearchProductView(UserLoginMixin, View):

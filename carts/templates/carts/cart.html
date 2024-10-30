@@ -130,7 +130,7 @@
                             <tr>
                                 <td>
                                     <div class="cart-checkout-btn pull-right">
-                                        {% if request.user.address %}
+                                        {% if not request.user.address.all %}
                                             <a href="{% url 'accounts:address' %}">
                                                 <button type="submit" class="btn btn-primary checkout-btn"
                                                         style="margin-right: 75px">اقدام به پرداخت

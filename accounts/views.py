@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.views.generic import View
 
-from accounts.models import Address
+from accounts.models import Address, Information, Wallet
 from custom_mixing.customize_mixing import UserLoginMixin
 
 
@@ -49,6 +49,8 @@ class RegisterView(View):
             return render(request, 'accounts/register.html', context={'error_password': error_password})
         elif user is None:
             user = User.objects.create_user(username, email, password1)
+            Information.objects.create(user=user)
+            Wallet.objects.create(user=user)
             login(request, user)
             return redirect('home:home')
 
