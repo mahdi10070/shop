@@ -2743,7 +2743,7 @@ input[type=date].input-lg,input[type=time].input-lg,input[type=datetime-local].i
 }
 
 .form-group {
-    margin-bottom: 15px
+    margin-bottom: 15px;
 }
 
 .radio,.checkbox {

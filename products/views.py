@@ -1,20 +1,38 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import DetailView, ListView, View
-from .models import Product, Category
+from django.views.generic.edit import FormMixin
+from blog.models import Blog
+from .models import Product, Category, Comment
 from accounts.models import Information
 from custom_mixing.customize_mixing import UserLoginMixin
+from . import forms
 
 
 # Create your views here.
-class ProductDetailView(UserLoginMixin, DetailView):
+class ProductDetailView(FormMixin, UserLoginMixin,  DetailView):
     model = Product
+    form_class = forms.CommentsForm
     template_name = 'products/product_detail.html'
 
+    def get_success_url(self):
+        return self.request.path
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.product = self.object
+            comment.user = request.user
+            comment.save()
+            return redirect(self.get_success_url())
+        else:
+            return self.form_invalid(form)
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['products'] = Product.objects.all()
         return context
-
 
 class ProductListView(ListView):
     model = Product

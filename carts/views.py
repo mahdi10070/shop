@@ -15,19 +15,21 @@ class CartView(UserLoginMixin, TemplateView):
         return context
 
 class AddToCartView(UserLoginMixin, View):
-    def get(self, request, id):
-        item = Product.objects.get(id=id)
-        wallet = Wallet.objects.get(user = request.user)
-        wallet.product.add(item)
-        wallet.save()
-        url = request.GET.get('next')
-        if url is not None:
-            return redirect(url)
-        return redirect('carts:cart')
 
     def post(self, request, id):
         product = Product.objects.get(id = id)
-        Wallet.objects.create(user = request.user, product = product)
+        count = request.POST.get('quantity-input')
+        if Wallet.objects.filter(user = request.user).exists():
+            print('inside')
+            object = Wallet.objects.get(user = request.user)
+            object.product.add(product)
+            object.save()
+        else:
+            print('outside')
+            object = Wallet.objects.create(user = request.user, count = count)
+            object.product.add(product)
+            object.count.add(int(count))
+            object.save()
         url = request.GET.get('next')
         if url is not None:
             return redirect(url)

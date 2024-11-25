@@ -1,8 +1,12 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.html import format_html
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 # Create your models here.
+
+
 
 
 class Category(models.Model):
@@ -15,6 +19,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'دسته یندی'
+
 class Product(models.Model):
     title = models.CharField(max_length=100, verbose_name="نام کالا")
     category = models.ManyToManyField(Category, related_name='product', verbose_name='دسته یندی')
@@ -26,6 +31,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/', verbose_name='عکس')
     discount = models.IntegerField(blank = True, null = True)
     slug = models.SlugField(max_length=100, unique=True, blank=True, null=True, verbose_name='آدرس دهی')
+    test = CKEditor5Field(blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -52,3 +58,18 @@ class Product(models.Model):
         verbose_name_plural = 'محصولات'
 
 
+class Comment(models.Model):
+    name = models.CharField(max_length=55, verbose_name='نام', )
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments', verbose_name='محصول')
+    email = models.EmailField(verbose_name='ایمیل')
+    body = models.TextField(verbose_name='متن')
+    created_date = models.DateTimeField(auto_now_add=True)
+    reply = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='reply_message',
+                               verbose_name='پاسخ')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "صفحه کامنت محصولات"
+        verbose_name_plural = "کامنت های محصولات"
