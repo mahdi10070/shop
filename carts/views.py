@@ -4,45 +4,31 @@ from django.views.generic import TemplateView, View
 from accounts.models import Wallet
 from products.models import Product
 from custom_mixing.customize_mixing import UserLoginMixin
+from .session import Cart
 
 # Create your views here.
 
 class CartView(UserLoginMixin, TemplateView):
     template_name = 'carts/cart.html'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['products'] = Product.objects.all()
-        return context
 
-class AddToCartView(UserLoginMixin, View):
 
+class AddCartSessionView(UserLoginMixin, View):
     def post(self, request, id):
         product = Product.objects.get(id = id)
+        print(f"in to add kardane ke {product.id}")
         count = request.POST.get('quantity-input')
-        if Wallet.objects.filter(user = request.user).exists():
-            print('inside')
-            object = Wallet.objects.get(user = request.user)
-            object.product.add(product)
-            object.save()
-        else:
-            print('outside')
-            object = Wallet.objects.create(user = request.user, count = count)
-            object.product.add(product)
-            object.count.add(int(count))
-            object.save()
-        url = request.GET.get('next')
-        if url is not None:
-            return redirect(url)
+        cart = Cart(request)
+        cart.add_cart(product, count)
+        print(count)
         return redirect('carts:cart')
 
+class ShowCartView(UserLoginMixin, View):
+    def get(self, request):
+        cart = Cart(request)
+        return render(request, 'carts/cart.html', {'cart': cart})
 
-class DeleteItemCartView(UserLoginMixin, View):
+class RemoveItemCartView(UserLoginMixin, View):
     def get(self, request, id):
-        product = Product.objects.get(id=id)
-        wallet = Wallet.objects.get(user = request.user)
-        wallet.product.remove(product)
-        url = request.GET.get('next')
-        if url is not None:
-            return redirect(url)
+        cart = Cart(request)
+        cart.remove_cart(id)
         return redirect('carts:cart')
-

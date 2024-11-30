@@ -31,39 +31,31 @@
                                 </thead><!-- /thead -->
 
                                 <tbody>
-                                {% for product in static_product %}
+                                {% for item in cart %}
                                     <tr>
-                                        <td class="romove-item"><a href="{% url 'carts:del_cart' product.id %}"
+                                        <td class="romove-item"><a href="{% url 'carts:del_cart' item.id %}"
                                                                    title="لغو" class="icon"><i
                                                 class="fa fa-trash-o"></i></a></td>
                                         <td class="cart-image">
                                             <a class="entry-thumbnail"
-                                               href="{% url 'products:product_detail' product.slug %}">
-                                                <img src="{{ product.image.url }}" alt="">
+                                               href="{% url 'products:product_detail' item.product.slug %}">
+                                                <img src="{{ item.product.image.url }}" alt="">
                                             </a>
                                         </td>
                                         <td class="cart-product-name-info">
                                             <h4 class="cart-product-description"><a
-                                                    href="{% url 'products:product_detail' product.slug %}">{{ product.title }}</a>
+                                                    href="{% url 'products:product_detail' item.product.slug %}">{{ item.product.title }}</a>
                                             </h4>
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="rating rateit-small"></div>
                                                 </div>
-                                                <div class="col-sm-12">
-                                                    <div class="reviews">
-                                                        (06 نظر)
-                                                    </div>
-                                                </div>
                                             </div><!-- /.row -->
-                                            <div class="cart-product-info">
-                                                <span class="product-color">رنگ: <span>آبی</span></span>
-                                            </div>
                                         </td>
                                         <td class="cart-product-sub-total"><span
-                                                class="cart-sub-total-price">{{ product.count }}</span></td>
+                                                class="cart-sub-total-price">{{ item.count }}</span></td>
                                         <td class="cart-product-sub-total"><span
-                                                class="cart-sub-total-price">{{ product.price }} تومان</span></td>
+                                                class="cart-sub-total-price">{{ item.total }} تومان</span></td>
 
                                     </tr>
                                 {% endfor %}
@@ -121,7 +113,7 @@
                             <tr>
                                 <th>
                                     <div class="cart-sub-total">
-                                        جمع کل <span class="inner-left-md">{{ total }} تومان</span>
+                                        جمع کل <span class="inner-left-md">{{ cart.all_total }} تومان</span>
                                     </div>
                                 </th>
                             </tr>

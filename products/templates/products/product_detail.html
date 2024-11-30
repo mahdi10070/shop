@@ -349,10 +349,6 @@
                                                             class="fa fa-shopping-cart inner-right-vs"></i>افزودن به سبد
                                                         خرید
                                                     </button>
-                                                    <button class="btn btn-primary px-3"><i
-                                                            class="fa fa-shopping-cart mr-1"></i> Add To
-                                                        Cart
-                                                    </button>
                                                 </div>
                                             </div><!-- /.row -->
                             </form>
@@ -378,30 +374,10 @@
                             <div class="blog-comments inner-bottom-xs outer-bottom-xs">
                                 <h4>{{ comments.name }}</h4>
                                 <span class="review-action pull-right">
-                                        {{ comments.created_date }}<a class="button" href="#">پاسخ</a>
+                                        {{ comments.created_date }}
 				</span>
                                 <br>
                                 <p>{{ comments.body }}</p>
-                            </div>
-                            {% else %}
-                            <div class="blog-comments-responce outer-top-xs ">
-                                <div class="row">
-                                    <div class="col-md-2 col-sm-2">
-                                        <img src="{% static 'images/testimonials/member2.png' %}"
-                                             alt="تصویر واکنش گرا"
-                                             class="img-rounded img-responsive">
-                                    </div>
-                                    <div class="col-md-10 col-sm-10 outer-bottom-xs">
-                                        <div class="blog-sub-comments inner-bottom-xs">
-                                            <h4>{{ comments.name }}</h4>
-                                            <span class="review-action pull-right">
-								03 روز پیش /
-								 <a href="#">پاسخ</a>
-							</span><br>
-                                            <p>{{ comments.body }}</p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     {% endif %}
